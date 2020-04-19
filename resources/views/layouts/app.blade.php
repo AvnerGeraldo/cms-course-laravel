@@ -75,9 +75,19 @@
         <main class="py-4">
             @auth
                 <div class="container">
+                    @if(session()->has('success'))
+                        <div class="row justify-content-center">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session()->get('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-4">
-                            <ul class="lis-group">
+                            <ul class="list-group">
                                 <li class="list-group-item">
                                     <a href="#">Post</a>
                                 </li>

@@ -16,7 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        return view('categories.index')->with('listCategories', Category::all());
     }
 
     /**
@@ -45,6 +45,9 @@ class CategoriesController extends Controller
         Category::create([
             'name' => $request->name
         ]);
+
+        //Session Message
+        session()->flash('success', 'Category created sucessfully!');
 
         //Redirect
         return redirect(route('categories.index'));
