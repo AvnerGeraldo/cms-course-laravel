@@ -5,7 +5,21 @@
     <div class="card card-default">
         <div class="card-header">Create Category</div>
         <div class="card-body">
-            <form action="">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <span>{{ $errors->first() }}</span>
+                    {{--
+                        <ul class="list-group">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    --}}
+                </div>
+            @endif
+            <form method="POST" action="{{ route('categories.store') }}">
+                @csrf
+
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" class="form-control">
