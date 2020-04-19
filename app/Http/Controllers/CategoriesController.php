@@ -40,6 +40,14 @@ class CategoriesController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:categories'
         ]);
+
+        //Save Category
+        Category::create([
+            'name' => $request->name
+        ]);
+
+        //Redirect
+        return redirect(route('categories.index'));
     }
 
     /**
