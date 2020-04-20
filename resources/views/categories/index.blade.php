@@ -1,7 +1,29 @@
 @extends('layouts.app')
 
-@section('content')
+@section('load-javascript')
+<script type="text/javascript">
+    let modalConfirmDelete;
+    $(document).ready(function() {
+        const modal = document.querySelector('#confirmDeleteModal');
+        const modalBody = modal.querySelector('.modal-body');
+        const modalFormDelete = modal.querySelector('.form-delete');
 
+        modalConfirmDelete = function(id, category) {
+            //Set name of category in modal body
+            const question = `Do you wanna delete '${category}' category ?`;
+            modalBody.textContent = question;
+
+            //Set form action
+            modalFormDelete.setAttribute('action', `/categories/${id}`);
+
+            //Open modal
+            $('#confirmDeleteModal').modal();
+        }
+    });
+</script>
+@endsection
+
+@section('content')
     <div class="card card-default">
         <div class="card-header">
             <div class="float-left my-2">Categories</div>
@@ -19,8 +41,8 @@
                         <tr>
                             <td colspan="3">{{  $category->name }}</td>
                             <td class="text-right">
-                                <a href="{{ route('categories.edit', [ 'category' => $category->id ]) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                                <button onClick="modalConfirmDelete({{ $category->id }}, '{{ $category->name }}')" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                <a href="{{ route('categories.edit', [ 'category' => $category->id ]) }}" class="text-primary" style="cursor: pointer"><i class="fas fa-edit"></i></a>
+                                <a onClick="modalConfirmDelete({{ $category->id }}, '{{ $category->name }}')" class="text-danger" style="cursor: pointer"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -51,21 +73,4 @@
         </div>
     </div>
     <!-- Modal -->
-    <script type="text/javascript">
-        const modal = document.querySelector('#confirmDeleteModal');
-        const modalBody = modal.querySelector('.modal-body');
-        const modalFormDelete = modal.querySelector('.form-delete');
-
-        function modalConfirmDelete(id, category) {
-            //Set name of category in modal body
-            const question = `Do you wanna delete '${category}' category ?`;
-            modalBody.textContent = question;
-
-            //Set form action
-            modalFormDelete.setAttribute('action', `/categories/${id}`);
-
-            //Open modal
-            $('#confirmDeleteModal').modal();
-        }
-    </script>
 @endsection
