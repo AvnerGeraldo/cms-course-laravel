@@ -3,7 +3,9 @@
 @section('content')
 
     <div class="card card-default">
-        <div class="card-header">Create Category</div>
+        <div class="card-header">
+            {{ isset($category) ? 'Edit Category' : 'Create Category' }}
+        </div>
         <div class="card-body">
             @if($errors->any())
                 <div class="alert alert-danger">
@@ -17,16 +19,20 @@
                     --}}
                 </div>
             @endif
-            <form method="POST" action="{{ route('categories.store') }}">
+            <form method="POST" action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}">
                 @csrf
+
+                @if (isset($category))
+                    @method('PUT')
+                @endif
 
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" class="form-control">
+                    <input type="text" id="name" name="name" value="{{ isset($category) ? $category->name : '' }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-success">Add Category</button>
+                    <button class="btn btn-success">{{ isset($category) ? 'Edit Category' : 'Add Category' }}</button>
                 </div>
             </form>
         </div>
