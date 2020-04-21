@@ -1,28 +1,5 @@
 @extends('layouts.app')
 
-@section('load-javascript')
-<script type="text/javascript">
-    let modalConfirmDelete;
-    $(document).ready(function() {
-        const modal = document.querySelector('#confirmDeleteModal');
-        const modalBody = modal.querySelector('.modal-body');
-        const modalFormDelete = modal.querySelector('.form-delete');
-
-        modalConfirmDelete = function(id, category) {
-            //Set name of category in modal body
-            const question = `Do you wanna delete '${category}' category ?`;
-            modalBody.textContent = question;
-
-            //Set form action
-            modalFormDelete.setAttribute('action', `/categories/${id}`);
-
-            //Open modal
-            $('#confirmDeleteModal').modal();
-        }
-    });
-</script>
-@endsection
-
 @section('content')
     <div class="card card-default">
         <div class="card-header">
@@ -73,4 +50,25 @@
         </div>
     </div>
     <!-- Modal -->
+@endsection
+
+@section('load-javascript')
+<script type="text/javascript">
+    function modalConfirmDelete(id, category) {
+        const modal = document.querySelector('#confirmDeleteModal');
+        const modalBody = modal.querySelector('.modal-body');
+        const modalFormDelete = modal.querySelector('.form-delete');
+
+        //Set name of category in modal body
+        const question = `Do you wanna delete '${category}' category ?`;
+        modalBody.textContent = question;
+        console.log(question, id);
+
+        //Set form action
+        modalFormDelete.setAttribute('action', `/categories/${id}`);
+
+        //Open modal
+        $('#confirmDeleteModal').modal();
+    }
+</script>
 @endsection
