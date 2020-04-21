@@ -41,7 +41,7 @@
                         <tr>
                             <td colspan="3">{{  $category->name }}</td>
                             <td class="text-right">
-                                <a href="{{ route('categories.edit', [ 'category' => $category->id ]) }}" class="text-primary" style="cursor: pointer"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('categories.edit', $category->id) }}" class="text-primary" style="cursor: pointer"><i class="fas fa-edit"></i></a>
                                 <a onClick="modalConfirmDelete({{ $category->id }}, '{{ $category->name }}')" class="text-danger" style="cursor: pointer"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
