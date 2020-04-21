@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\Category\CreateCategoryRequest;
 
 //Models
 use App\Model\Category;
