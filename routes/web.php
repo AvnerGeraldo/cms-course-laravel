@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Categories Resource
 Route::resource('categories', 'CategoriesController');
+
+//Posts Resource
+Route::resource('posts', 'PostController');
