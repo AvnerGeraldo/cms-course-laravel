@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\CreateCategoryRequest;
 
 //Models
@@ -82,9 +81,16 @@ class CategoriesController extends Controller
     public function update(CreateCategoryRequest $request, Category $category)
     {
         //Update Category
+        /*
+         * First way
         $category->name = $request->name;
 
         $category->save();
+        */
+        #Second way
+        $category->update([
+            'name' => $request->name
+        ]);
 
         //Flash Message
         session()->flash('success', 'Category updated successfully!');
