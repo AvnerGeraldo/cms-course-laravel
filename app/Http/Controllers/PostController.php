@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostsRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Model\Post;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -97,7 +96,7 @@ class PostController extends Controller
             $image = $request->image->store('posts');
 
             //Delete old one
-            Storage::delete($post->image);
+            $post->deleteImage();
 
             //Store the new one
             $data['image'] = $image;
@@ -127,7 +126,7 @@ class PostController extends Controller
         //Delete post
         if ($post->trashed()) {
             //Delete image file
-            Storage::delete($post->image);
+            $post->deleteImage();
 
             //Delete post
             $post->forceDelete();
@@ -156,5 +155,23 @@ class PostController extends Controller
         //Redirect
         //After the 'with' method, laravel know that the variable name is 'posts'
         return view('posts.index')->withPosts($trashed)->withTrashedPage(true);
+    }
+
+    /**
+     * Restore trashed posts
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(int $id)
+    {
+        //Find Post
+        $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+
+        //Restore Post
+        $post->restore();
+
+        session()->flash('success', 'Post restored successfully!');
+
+        return redirect()->back();
     }
 }

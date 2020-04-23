@@ -35,6 +35,13 @@
                                     </form>
                                     @if (!$post->trashed())
                                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm float-right">Edit</a>
+                                    @else
+                                    <form action="{{ route('restore-posts', $post->id) }}" method="POST" class="float-right ml-2">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <button type="submit" onclick="return confirm('Do you wanna restore the post \'{{ $post->title}}\' ?');" class="btn btn-info btn-sm">Restore</button>
+                                    </form>
                                     @endif
                                 </td>
                             </tr>
