@@ -5,6 +5,9 @@
  */
 
 require('./bootstrap');
+import flatpickr from "flatpickr";
+import "flatpickr/dist/l10n/pt.js";
+import "flatpickr/dist/flatpickr.min.css";
 
 window.Vue = require('vue');
 

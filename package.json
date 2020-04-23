@@ -35,6 +35,7 @@
         }
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.13.0"
+        "@fortawesome/fontawesome-free": "^5.13.0",
+        "flatpickr": "^4.6.3"
     }
 }
