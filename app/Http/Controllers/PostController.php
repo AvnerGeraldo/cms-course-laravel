@@ -45,7 +45,8 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'image' => $image
+            'image' => $image,
+            'published_at' => $request->published_at
         ]);
 
         //Flash a message
