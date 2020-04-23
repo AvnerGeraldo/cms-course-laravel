@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostsRequest;
 use App\Model\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -101,6 +102,10 @@ class PostController extends Controller
 
         //Delete post
         if ($post->trashed()) {
+            //Delete image file
+            Storage::delete($post->image);
+
+            //Delete post
             $post->forceDelete();
             $flashMessage = 'Post deleted successfully!';
         } else {
